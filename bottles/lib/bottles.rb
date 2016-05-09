@@ -10,26 +10,42 @@ class Bottles
 
   def verse(num)
     case num
-    when 2
-      "2 bottles of beer on the wall, " +
-      "2 bottles of beer.\n" +
-      "Take one down and pass it around, " +
-      "1 bottle of beer on the wall.\n"
-    when 1
-      "1 bottle of beer on the wall, " +
-      "1 bottle of beer.\n" +
-      "Take it down and pass it around, " +
-      "no more bottles of beer on the wall.\n"
     when 0
-      "No more bottles of beer on the wall, " +
-      "no more bottles of beer.\n" +
+      "#{stringified_quantity(num).capitalize} #{matching_noun(num)} of beer on the wall, " +
+      "#{stringified_quantity(num)} #{matching_noun(num)} of beer.\n" +
       "Go to the store and buy some more, " +
-      "99 bottles of beer on the wall.\n"
+      "#{stringified_quantity(num-1)} #{matching_noun(num-1)} of beer on the wall.\n"
     else
-      "#{num} bottles of beer on the wall, " +
-      "#{num} bottles of beer.\n" +
-      "Take one down and pass it around, " +
-      "#{num-1} bottles of beer on the wall.\n"
+      "#{stringified_quantity(num).capitalize} #{matching_noun(num)} of beer on the wall, " +
+      "#{stringified_quantity(num)} #{matching_noun(num)} of beer.\n" +
+      "Take #{thing_to_take(num)} down and pass it around, " +
+      "#{stringified_quantity(num-1)} #{matching_noun(num-1)} of beer on the wall.\n"
+    end
+  end
+
+  def matching_noun(num)
+    if num == 1
+      "bottle"
+    else
+      "bottles"
+    end
+  end
+
+  def thing_to_take(num)
+    if num == 1
+      "it"
+    else
+      "one"
+    end
+  end
+
+  def stringified_quantity(num)
+    if num == 0
+      "no more"
+    elsif num == -1
+      99
+    else
+      num.to_s
     end
   end
 end
